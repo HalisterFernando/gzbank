@@ -10,17 +10,17 @@ module.exports = {
         autoIncrement: true,
       },
       debitedAccountId: {
-        type: Sequelize.NUMBER,
+        type: Sequelize.INTEGER,
         allowNull: false,
       },
     
       creditedAccountId: {
-        type: Sequelize.NUMBER,
+        type: Sequelize.INTEGER,
         allowNull: false,
       },
     
       value: {
-        type: Sequelize.STRING,
+        type: Sequelize.DECIMAL(12,2),
         allowNull: false,
       },
     
