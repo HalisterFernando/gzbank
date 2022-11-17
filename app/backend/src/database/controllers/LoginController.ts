@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import { ILoginService } from '../services/LoginService';
+import jwt from '../../helpers/jwt';
 
 export default class LoginController {
     
@@ -8,7 +9,8 @@ export default class LoginController {
     
     login = async ( req: Request, res: Response) => {
         const { username } = req.body  
-        const users = await this.userService.login(username);
-        return res.status(StatusCodes.OK).json(users)
+        await this.userService.login(username);
+        const token = jwt.sign({username})
+        return res.status(StatusCodes.OK).json(token)
     }   
 }
