@@ -15,12 +15,7 @@ export default class UserService implements IUserService {
     private getUserById = async (id: number): Promise<IUser | null> => {
         const user = await User.findByPk(id)
         return user
-    }
-
-    private createNewUser = async (username: string, password: string): Promise<IUser>  => {
-        const newUser = await User.create({username, password})
-        return newUser
-    }
+    }   
 
     async list(): Promise<IUser[]> {
         const users = await this.getAllUsers();
