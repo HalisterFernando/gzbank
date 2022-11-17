@@ -2,7 +2,7 @@ import { DECIMAL } from 'sequelize';
 import { INTEGER, Model } from 'sequelize';
 import Transaction from './transaction';
 import db from '.';
-import User from './user';
+// import User from './user';
 
 export default class Account extends Model {
   id!: number;
@@ -26,17 +26,17 @@ Account.init({
   timestamps: false,
 });
 
-Account.hasOne(User, {
-    foreignKey: 'accountId',
-    as: 'users'
-})
+// Account.hasOne(User, {
+//     foreignKey: 'id',
+//     as: 'users'
+// })
 
 Account.hasMany(Transaction, {
     foreignKey: 'debitedAccountId',
-    as: 'transactions'
+    as: 'debited_transactions'
 })
 
 Account.hasMany(Transaction, {
     foreignKey: 'creditedAccountId',
-    as: 'transactions'
+    as: 'credited_transactions'
 })

@@ -11,6 +11,6 @@ const router = Router()
 
 router.get('/', userController.list);
 router.get('/id', userController.getById)
-router.post('/sigin', userController.create)
+
 
 export default router

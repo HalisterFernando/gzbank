@@ -15,12 +15,6 @@ export default class UserController {
         const {id} = req.params;
         const user = await this.userService.getById(Number(id));
         return res.status(StatusCodes.OK).json(user);
-    }
-
-    create = async (req: Request, res: Response) => {
-        const {username, password} = req.body;
-        const newUser = await this.userService.create(username, password)
-        return res.status(StatusCodes.OK).json(newUser)
-    }
+    }  
     
 }

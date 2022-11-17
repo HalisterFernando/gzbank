@@ -1,15 +1,34 @@
-import * as express from 'express'
-import 'dotenv/config'
-import UserRouter from './database/routers/UserRouter'
-import LoginRouter from './database/routers/LoginRouter'
+import * as express from 'express';
+import 'dotenv/config';
+import db from './database/models';
+import UserRouter from './database/routers/UserRouter';
+import LoginRouter from './database/routers/LoginRouter';
+import SigninRouter from './database/routers/SigninRouter';
+
+const PORT = process.env.APP_PORT;
+
 
 const app = express();
 app.use(express.json())
 
+
+app.get('/', async (req, res) => {
+    return res.status(200).send({message: 'Servidor conectado'});
+})
+
+
 app.use('/user', UserRouter)
 app.use('/login', LoginRouter)
+app.use('/signin', SigninRouter)
 
 
-app.listen( () => {
-  console.log(`App está rodando na porta ${process.env.DB_PORT}`)
+
+app.listen(PORT, () => {
+    try {
+        db.authenticate();
+        console.log('Deu bom')    
+    } catch (err) {
+        console.log('Deu ruim', err)
+    }
+    console.log('Ouvindo a porta', PORT)
 })

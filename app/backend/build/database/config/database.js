@@ -5,7 +5,7 @@ const config = {
     password: process.env.DB_PASS || 'password',
     database: process.env.DB_NAME || 'ng_cash',
     host: process.env.DB_HOST || 'localhost',
-    port: Number(process.env.DB_PORT) || 3305,
+    port: Number(process.env.DB_PORT) || 3306,
     dialect: 'mysql',
 };
 module.exports = config;

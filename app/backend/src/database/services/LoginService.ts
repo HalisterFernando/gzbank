@@ -7,7 +7,7 @@ export interface ILoginService  {
 
 export default class LoginService implements ILoginService {
     private userLogin = async (username: string): Promise<IUser | null> => {
-        const user = User.findOne({where: {username}})
+        const user = await User.findOne({where: {username}})
         return user
     }
 

@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import * as joi from 'joi';
-const  passwordComplexity = require('joi-password-complexity')
 import User from '../models/user';
+const  passwordComplexity = require('joi-password-complexity')
 
 export default async (req: Request, res: Response, next: NextFunction) => {
     

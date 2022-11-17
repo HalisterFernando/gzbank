@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import User from '../models/user';
+const bcrypt = require('bcrypt')
 
 export default async (req: Request, res: Response, next: NextFunction) => {
     

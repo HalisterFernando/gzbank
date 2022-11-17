@@ -2,8 +2,7 @@ import IUser from "../interfaces/IUser"
 import User from "../models/user"
 
 export interface IUserService  {
-    list(): Promise<IUser[]>
-    create(username: string, password: string): Promise<IUser>
+    list(): Promise<IUser[]>    
     getById(id: number): Promise<IUser | null>
 }
 
@@ -33,8 +32,5 @@ export default class UserService implements IUserService {
         return user
     }
 
-    async create(username: string, password: string): Promise<IUser> {
-        const newUser = await this.createNewUser(username, password)
-        return newUser
-    }
+   
 }

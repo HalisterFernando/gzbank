@@ -10,7 +10,7 @@ module.exports = {
         autoIncrement: true
       },
       
-      value: {
+      balance: {
         type: Sequelize.DECIMAL(12,2),
         allowNull: false
       }
