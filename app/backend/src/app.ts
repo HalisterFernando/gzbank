@@ -4,6 +4,7 @@ import db from './database/models';
 import UserRouter from './database/routers/UserRouter';
 import LoginRouter from './database/routers/LoginRouter';
 import SigninRouter from './database/routers/SigninRouter';
+import AccountRouter from './database/routers/AccountRouter'
 
 const PORT = process.env.APP_PORT;
 
@@ -20,6 +21,7 @@ app.get('/', async (req, res) => {
 app.use('/user', UserRouter)
 app.use('/login', LoginRouter)
 app.use('/signin', SigninRouter)
+app.use('/account', AccountRouter)
 
 
 
