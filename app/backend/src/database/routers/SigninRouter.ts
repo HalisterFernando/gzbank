@@ -2,6 +2,7 @@ import { Router } from 'express';
 
 import SigninService from '../services/SigninService';
 import SigninController from '../controllers/SigninController';
+import SigninValidate from '../middlewares/SigninValidate';
 
 
 
@@ -10,7 +11,7 @@ const signinController = new SigninController(signinService);
 
 const router = Router()
 
-router.post('/', signinController.signin);
+router.post('/', SigninValidate, signinController.signin);
 
 
 export default router
