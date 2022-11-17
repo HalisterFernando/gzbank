@@ -4,11 +4,17 @@ const bcrypt = require('bcrypt')
 
 export default async (req: Request, res: Response, next: NextFunction) => {
     
-    const {username} = req.body
+    const {username, password} = req.body
     const user = await User.findOne({where: {username}})
 
     if (!user) {
-        const err = new Error('Usuário não encontrado')
+        throw new Error('Usuário não encontrado')        
+    }    
+    
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+
+    if (!isPasswordValid) {
+        throw new Error('Senha inválida')
     }
 
     return next()
