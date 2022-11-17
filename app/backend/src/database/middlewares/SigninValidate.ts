@@ -7,6 +7,12 @@ export default async (req: Request, res: Response, next: NextFunction) => {
     
     const {username, password} = req.body
 
+    const checkIfUserExists = await User.findOne({where: {username}});
+
+    if (checkIfUserExists) {
+        throw new Error('Este nome de usuário já existe')
+    }
+
     const complexity = {
         min: 8,
         max: 26,
