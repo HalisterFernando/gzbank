@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npm run build && node ./build/app.js",
-    "dev": "tsnd app.ts",
+    "dev": "nodemon --watch \"./src/**/\" ./src/app.ts",
     "migrate": "npx sequelize db:migrate",
     "build": "tsc",
     "db:reset": "npx -y tsc && npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all"
@@ -27,6 +27,8 @@
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "http-status-codes": "^2.2.0",
+    "joi": "^17.7.0",
+    "joi-password-complexity": "^5.1.0",
     "jsonwebtoken": "^8.5.1",
     "nodemon": "^2.0.20",
     "sequelize": "^6.25.6"
