@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import User from '../models/user';
-const bcrypt = require('bcrypt')
+import bcrypt from '../../helpers/bcrypt';
 
 export default async (req: Request, res: Response, next: NextFunction) => {
     
@@ -11,7 +11,7 @@ export default async (req: Request, res: Response, next: NextFunction) => {
         throw new Error('Usuário não encontrado')        
     }    
     
-    const isPasswordValid = await bcrypt.compare(password, user.password);
+    const isPasswordValid = await bcrypt.checkPassword(password, user.password)
 
     if (!isPasswordValid) {
         throw new Error('Senha inválida')
