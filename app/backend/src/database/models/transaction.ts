@@ -31,7 +31,7 @@ Transaction.init({
   },
 
   createdAt: {
-    type: DATE
+    type: STRING
   }
 
 }, {
@@ -39,7 +39,6 @@ Transaction.init({
   modelName: 'transactions',
   underscored: true,
   tableName: 'Transactions',
-  createdAt: 'createdAt',
-  updatedAt: undefined  
+  timestamps: false  
 });
 
