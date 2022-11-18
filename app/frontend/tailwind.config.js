@@ -4,7 +4,22 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        "ng-pink": "#FE2BFE",
+        "ng-green": "#03D60F"
+      }
+    },
   },
-  plugins: [],
+  plugins: [require("daisyui")],
+  daisyui: {
+    styled: false,
+    themes: true,
+    base: true,
+    utils: true,
+    logs: true,
+    rtl: false,
+    prefix: "",
+    darkTheme: "dark",
+  },
 }

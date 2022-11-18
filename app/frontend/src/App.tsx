@@ -1,11 +1,13 @@
 import React from 'react';
+import Login from './pages/Login';
 
 
 
 function App() {
   return (
     <div className="App">
-     <h1 className='text-3xl font-bold underline'>Desafio_NG_teste</h1>
+     <Login />
+
     </div>
   );
 }
