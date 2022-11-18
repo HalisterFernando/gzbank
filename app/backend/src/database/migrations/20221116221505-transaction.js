@@ -12,11 +12,13 @@ module.exports = {
       debitedAccountId: {
         type: Sequelize.INTEGER,
         allowNull: false,
+        field: 'debited_account_id'
       },
     
       creditedAccountId: {
         type: Sequelize.INTEGER,
         allowNull: false,
+        field: 'credited_account_id'
       },
     
       value: {
@@ -25,8 +27,9 @@ module.exports = {
       },
     
       createdAt: {
-        type: Sequelize.DATE
-      }
+        type: Sequelize.STRING,
+        field: 'created_at'
+      },    
     })
   },
 

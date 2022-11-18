@@ -12,7 +12,8 @@ export default class AccountService implements IAccountService {
         const balance = await Account.findByPk(user!.accountId);
         return balance
 
-    } 
+    }  
+
     async account(username: string): Promise<IAccount | unknown> {
         const balance = await this.getBalance(username)
         return balance

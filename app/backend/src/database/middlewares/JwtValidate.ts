@@ -7,6 +7,6 @@ export default async (req: Request, res: Response, next: NextFunction) => {
         throw new Error('Usuário precisa estar logado para ver o saldo')
     }
     const {username} = jwt.verify(token)
-    req.body = {username}
+    req.body = {...req.body, username}
     return next()
 }
