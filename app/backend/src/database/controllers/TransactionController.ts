@@ -20,4 +20,11 @@ export default class TransactionController {
         });
         return res.status(StatusCodes.OK).json(newTransaction)
     }   
+
+    list = async (req: Request, res: Response) => {
+        const { id } = req.body
+        const transaction = await this.transactionService.getById(id)
+
+        return res.status(StatusCodes.OK).json(transaction)
+    }
 }

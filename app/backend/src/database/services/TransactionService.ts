@@ -1,7 +1,7 @@
 import ITransaction from "../interfaces/ITransaction";
 import Account from "../models/account";
 import Transaction from "../models/transaction";
-import date from '../../helpers/date'
+
 
 type transfer = {
     debitedAccountId: number,
@@ -12,6 +12,7 @@ type transfer = {
 
 export interface ITransactionService {
     cashOut(data: transfer): Promise<ITransaction>
+    getById(id: number): Promise<ITransaction[]>
 }
 
 export default class TransactionService implements ITransactionService {
@@ -44,8 +45,24 @@ export default class TransactionService implements ITransactionService {
         return newTransaction
     }
 
+    getAllTransactions = async (): Promise<ITransaction[]> => {
+        const allTransactions = await Transaction.findAll();
+        return allTransactions
+
+    }
+
     async cashOut(data: transfer): Promise<ITransaction> {
         const newTransaction = await this.cashTransfer(data)
         return newTransaction
+    }
+
+    async getById(id: number): Promise<ITransaction[]> {
+        const allTransactions = await this.getAllTransactions()
+        const userTransactions = allTransactions
+        .filter((
+            {creditedAccountId, debitedAccountId}
+            ) => creditedAccountId === Number(id) || debitedAccountId === Number(id));
+
+        return userTransactions
     }
 }
