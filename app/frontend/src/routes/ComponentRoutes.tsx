@@ -1,31 +1,18 @@
 import React from 'react'
-import { Navigate } from 'react-router-dom'
-
-
 import { Route, Routes } from 'react-router-dom'
-import Home from '../pages/Home'
+import FormPage from '../pages/FormPage'
+import UserPage from '../pages/UserPage'
+import Welcome from '../pages/Welcome'
 
 
 
 const ComponentRoutes = () => {   
   return (
     <Routes>
-      <Route 
-      path='/'
-      element={<Navigate to="/signin" replace />}
-      />
-      <Route       
-      path='/signin'
-      element={ 
-      <Home />     
-    }    
-      />
-      <Route 
-      path='/login'
-      element={
-        <Home />
-      }
-      />
+      <Route path='/' element={ <Welcome/> } />
+      <Route path='/signin' element={ <FormPage /> } />
+      <Route path='/login'  element={ <FormPage /> } />
+      <Route path='/user' element={ <UserPage />} />
     </Routes>
   )
 }
