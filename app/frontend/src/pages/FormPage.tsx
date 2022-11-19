@@ -7,7 +7,7 @@ const FormPage = () => {
   const loginPath = window.location.href.includes('login')
   return (
     <Form     
-    onSubmit={() => loginPath ? history('/user') : history('/login')}
+    onSubmit={() => loginPath ? history('/balance') : history('/login')}
     />
   )
 }

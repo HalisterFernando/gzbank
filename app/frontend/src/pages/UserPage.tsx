@@ -7,19 +7,19 @@ import useLoading from '../hooks/useLoading'
 const UserPage = () => {
   const { loading } = useLoading()
   return (
-    <div>
+    <>
       {
         loading ? 
         (<Loading />) : 
         (
-          <>
+          <div>
             <Header />
             <h1>UserPage</h1>
             <PageFooter />
-          </>
+          </div>
         )
       }
-    </div>
+    </>
   )
 }
 
