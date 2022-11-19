@@ -9,4 +9,48 @@
   box-sizing: border-box;
 }
 
+@layer components {
+  .icon-green {
+    @apply
 
+    rounded-full
+    border-4
+    p-2      
+    border-ng-green 
+    flex 
+    items-center
+    text-xl
+    text-white
+  }
+
+  .icon-pink {
+    @apply 
+
+    rounded-full
+    border-4
+    p-2      
+    border-ng-pink 
+    flex 
+    items-center
+    text-xl
+    text-white
+
+  }
+
+  .link-white {
+    @apply
+    
+    text-sm 
+    text-white 
+    font-medium
+  }
+
+  .link-pink {
+    @apply
+    
+    text-sm 
+    text-ng-pink
+    font-medium
+  }
+
+}
