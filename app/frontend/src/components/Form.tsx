@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { FormikValues, useFormik } from 'formik'
-import signInSchema from '../validations/yupSchemas'
+import validationSchema from '../validations/yupSchemas'
 
 
 
@@ -14,18 +14,18 @@ const Form = ({onSubmit}: FormikValues) => {
   const path = window.location.href.includes('login');
 
   useEffect(() => {
+    const threeSeconds = 3000
     if (path) {
       setLoading(true)
     }
     setTimeout(() => {
       setLoading(false)
-    }, 3000)
+    }, threeSeconds)
   }, [path])
 
-  
-  const formik = useFormik({
+    const formik = useFormik({
         initialValues,
-        validationSchema: signInSchema,
+        validationSchema,
         onSubmit
     });    
 
@@ -63,7 +63,7 @@ const Form = ({onSubmit}: FormikValues) => {
         </div>
     ) : (
       <>
-        <h1>Bem vindo ao NG_APP</h1>
+        <h1>{path ? "Conta criada com sucesso!" : "Bem-vindo ao NG_APP"}</h1>
         <div className='
             w-[85%] 
             min-h-96
@@ -76,9 +76,9 @@ const Form = ({onSubmit}: FormikValues) => {
         <h2 className='text-center text-white font-semibold'>Crie sua conta</h2>
           <form onSubmit={formik.handleSubmit} className='mt-5'>
             <label htmlFor="" className='text-white font-semibold'>Nome de usuário</label>
-            <input 
-                type="text" 
-                placeholder='Flávio Albuquerque'
+            <input                
+                type="text"                                
+                placeholder='Flávio Albuquerque'              
                 {...usernameProps}
                 className='
                 rounded-md
@@ -96,7 +96,7 @@ const Form = ({onSubmit}: FormikValues) => {
               <label htmlFor="" className='text-white font-semibold'>Senha</label>
             <input 
                 type="password" 
-                placeholder='S3nha123'
+                placeholder='S3nha123'                
                 {...passwordProps}
                 className='
                 rounded
@@ -125,7 +125,8 @@ const Form = ({onSubmit}: FormikValues) => {
                     text-slate-200
                     hover:bg-ng-green
                     
-                    ">Criar Conta
+                    ">
+                      {path ? "Login" : "Criar Conta"}
                 </button>
             </div>
           </form>
