@@ -37,6 +37,19 @@
 
   }
 
+  .icon-red {
+    @apply
+
+    rounded-full
+    border-4
+    p-2      
+    border-red-600
+    flex 
+    items-center
+    text-xl
+    text-white
+  }
+
   .link-white {
     @apply
     
@@ -51,6 +64,51 @@
     text-sm 
     text-ng-pink
     font-medium
+  }
+
+  .able-green-btn {
+    @apply 
+
+    btn 
+    btn-active 
+    bg-ng-green
+    w-full
+    text-xl
+    font-bold
+    text-slate-200    
+  }
+
+  .disable-green-btn {
+    @apply 
+
+    btn 
+    btn-active 
+    bg-green-300
+    w-full
+    text-xl
+    font-bold
+    text-slate-200    
+  }
+
+  .hidden-transfer-alert {
+    @apply
+
+    bg-ng-pink
+    p-2
+    rounded-md
+    font-semibold
+    text-center
+    hidden
+  }
+
+  .show-transfer-alert {
+    @apply
+
+    bg-ng-pink
+    p-2
+    rounded-md
+    font-semibold
+    text-center    
   }
 
 }
