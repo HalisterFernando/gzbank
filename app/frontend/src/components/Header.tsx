@@ -13,7 +13,7 @@ const Header = () => {
     justify-evenly
     gap-2
     ">
-        <span className='text-white'>Olá Usuário</span>
+        <span className='text-white font-semibold'>Olá Usuário</span>
        <div className='flex gap-4'>
         <Links />
        </div>
