@@ -13,7 +13,7 @@ const Header = () => {
       const {id, username, accountId} = localStorageUser
       saveUserData(id, username, accountId)
     }
-  })
+  }, [])
 
   return (
     <header className="
