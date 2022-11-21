@@ -14,7 +14,7 @@ const ComponentRoutes = () => {
         <Route path='/signin' element={ <FormPage /> } />
         <Route path='/login'  element={ <FormPage /> } />
         <Route path='/balance' element={ <BalancePage />} />
-        <Route path='/transaction' element={ <TransactionPage /> } />
+        <Route path='/transaction/history/:id' element={ <TransactionPage /> } />
         <Route path='/transfer' element={ <TransferPage /> } />      
       </Routes>
    

@@ -8,8 +8,10 @@ const LoginRouter_1 = require("./database/routers/LoginRouter");
 const SigninRouter_1 = require("./database/routers/SigninRouter");
 const AccountRouter_1 = require("./database/routers/AccountRouter");
 const TransactionRouter_1 = require("./database/routers/TransactionRouter");
+const cors = require('cors');
 const PORT = process.env.APP_PORT;
 const app = express();
+app.use(cors());
 app.use(express.json());
 app.get('/', async (req, res) => {
     return res.status(200).send({ message: 'Servidor conectado' });

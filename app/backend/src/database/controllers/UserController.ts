@@ -16,5 +16,11 @@ export default class UserController {
         const user = await this.userService.getById(Number(id));
         return res.status(StatusCodes.OK).json(user);
     }  
+
+    getByName = async (req: Request, res: Response) => {
+        const {username} = req.params
+        const user = await this.userService.getByName(username);
+        return res.status(StatusCodes.OK).json(user);
+    }
     
 }

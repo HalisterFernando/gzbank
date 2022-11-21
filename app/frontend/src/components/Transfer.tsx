@@ -2,23 +2,29 @@ import React, { useState, ChangeEvent, useEffect, FormEvent, useContext } from '
 
 import { GiPayMoney } from 'react-icons/gi'
 import {userContext, UserContextType } from '../context/UserContext';
-import { requestData } from '../helpers/requests';
+import { requestData, requestPost } from '../helpers/requests';
 import { getItem } from '../helpers/localStorage';
 import { setToken } from '../helpers/requests'
 
+type Account = {
+    accountId: string,
+    username: string
+}
+
 function Transfer() {
 
-    const { user } = useContext(userContext) as UserContextType
+    const { user, userAmount, saveUserAmount } = useContext(userContext) as UserContextType
 
     const [transfer, setTransfer] = useState({
+        accountId: '',
         username: '',
         amount: '',
     })
 
-    const [accounts, setAccounts] = useState([])
+    const [accounts, setAccounts] = useState<Account[]>([])
 
          
-    const { username, amount } = transfer;
+    const { username, amount, accountId } = transfer;
 
     const [isDisabled, setIsDisabled] = useState(true)
     const [hidden, setHidden] = useState(true)
@@ -28,10 +34,16 @@ function Transfer() {
         setTransfer({...transfer, [name]: value})
     };
     
-    const handleSubmit = (ev: FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (ev: FormEvent<HTMLFormElement>) => {
         ev.preventDefault();
 
         const threeSeconds = 3000;
+       
+        await requestPost('/transaction', {
+            debitedAccountId: user.accountId,
+            creditedAccountId: accountId,
+            value: amount
+         })
         
         setHidden(false)
         
@@ -43,8 +55,10 @@ function Transfer() {
     const validateAmount = () => {
         const regex = /^\d+$/gi
         const isAmountValid = regex.test(amount)
+        const isAmountEnought = Number(userAmount.amount) > Number(amount)
+        console.log(userAmount.amount)
         
-        if (isAmountValid && username) {
+        if (isAmountValid && username && isAmountEnought) {
             setIsDisabled(false)
          
         } else {
@@ -57,11 +71,24 @@ function Transfer() {
     }, [transfer])
 
     useEffect(() => {
+   
+        const getBalance = async () => {
+          const token = getItem('token')
+          setToken(token)
+          const {balance: {balance}} = await requestData(`/account`)
+          saveUserAmount(balance)
+        }
+        getBalance()
+      }, [hidden])  
+
+    useEffect(() => {
+
         const getAccounts = async () => {
             const token = getItem('token')
             setToken(token)
-            const allAcounts = await requestData(`/account/transfer`);
-            setAccounts(allAcounts)
+            const allAccounts = await requestData(`/account/transfer`);
+            setAccounts(allAccounts)
+            setTransfer({...transfer,accountId: allAccounts[0].accountId, username: allAccounts[0].username})
         }
 
         getAccounts()
@@ -114,7 +141,7 @@ function Transfer() {
                         w-full 
                         max-w-xs"
                 >
-                    <option disabled selected>Selecione um usuário</option>
+                   
                     {accounts.length && accounts.map(({accountId, username}) => (
                         <option key={accountId} id={accountId} value={username}>{username}</option>
                     ))}

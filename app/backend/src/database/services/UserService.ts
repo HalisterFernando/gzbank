@@ -4,6 +4,7 @@ import User from "../models/user"
 export interface IUserService  {
     list(): Promise<IUser[]>    
     getById(id: number): Promise<IUser | null>
+    getByName(username: string): Promise<IUser | null>
 }
 
 export default class UserService implements IUserService {
@@ -17,6 +18,11 @@ export default class UserService implements IUserService {
         return user
     }   
 
+    private getUserByName = async (username: string): Promise<IUser | null> => {
+        const user = await User.findOne({where: {username}})
+        return user
+    }
+
     async list(): Promise<IUser[]> {
         const users = await this.getAllUsers();
         return users
@@ -26,6 +32,13 @@ export default class UserService implements IUserService {
         const user = await this.getUserById(id);
         return user
     }
+
+    async getByName(username: string): Promise<IUser | null> {
+        const user = await this.getUserByName(username)
+        return user
+    }
+
+
 
    
 }
