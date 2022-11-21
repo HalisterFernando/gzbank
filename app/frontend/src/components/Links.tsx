@@ -5,18 +5,18 @@ import { FaMoneyBillWave } from 'react-icons/fa';
 import { BiLogOut } from 'react-icons/bi';
 import useCheckPath from '../hooks/useCheckPath';
 import { useNavigate } from 'react-router-dom';
-import { userContext, UserContextType } from '../context/UserContext';
+// import { userContext, UserContextType } from '../context/UserContext';
 
 
 function Links() {
   const {path: {transaction, balance, transfer}} = useCheckPath();
-  const {user} = useContext(userContext) as UserContextType
+  // const {user} = useContext(userContext) as UserContextType
   const history = useNavigate()
   
   
   return (
     <>       
-    <span className="flex flex-col items-center mb-2 gap-1" onClick={() => history(`/transaction/${user.username}`)}>
+    <span className="flex flex-col items-center mb-2 gap-1" onClick={() => history(`/transaction`)}>
       <i className={ transaction ? "icon-pink" : "icon-green" }
       >
         <BiTransfer />
@@ -24,7 +24,7 @@ function Links() {
       <span className={ transaction ? "link-pink" : "link-white" }>Transações</span>
     </span>
     
-    <span className="flex flex-col items-center mb-2 gap-1" onClick={() => history(`/balance/${user.username}`)}>
+    <span className="flex flex-col items-center mb-2 gap-1" onClick={() => history(`/balance`)}>
       <i className={ balance ? "icon-pink" : "icon-green" }
       >
         <MdAttachMoney />
@@ -33,7 +33,7 @@ function Links() {
           Saldo Atual
       </span>
     </span>
-    <span className="flex flex-col items-center mb-2 gap-1" onClick={() => history(`/transfer/${user.username}`)}>
+    <span className="flex flex-col items-center mb-2 gap-1" onClick={() => history(`/transfer`)}>
       <i className={ transfer ? "icon-pink" : "icon-green" }
       >
         <FaMoneyBillWave />

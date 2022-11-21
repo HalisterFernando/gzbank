@@ -60,7 +60,7 @@ function Transfer() {
         const getAccounts = async () => {
             const token = getItem('token')
             setToken(token)
-            const allAcounts = await requestData(`/account/transfer/${user.username}`);
+            const allAcounts = await requestData(`/account/transfer`);
             setAccounts(allAcounts)
         }
 
@@ -116,7 +116,7 @@ function Transfer() {
                 >
                     <option disabled selected>Selecione um usuário</option>
                     {accounts.length && accounts.map(({accountId, username}) => (
-                        <option id={accountId} value={username}>{username}</option>
+                        <option key={accountId} id={accountId} value={username}>{username}</option>
                     ))}
                 </select>
                 <label 

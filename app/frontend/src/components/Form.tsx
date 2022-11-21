@@ -31,6 +31,7 @@ const Form = () => {
         if (loginPath) {
           const response = await requestPost('/login', {username, password})
           setItem('token', response.token);
+          setItem('user', response.userData);
 
           saveUserData(
             response.userData.id, 
@@ -38,11 +39,10 @@ const Form = () => {
             response.userData.accountId
             )
         } else {
-          const response = await requestPost('/signin', {username, password})
-          console.log(response)
+          const response = await requestPost('/signin', {username, password})          
         }
 
-        return loginPath ? history(`/balance/${username}`) : history('/login')
+        return loginPath ? history(`/balance`) : history('/login')
       }
   });    
 
