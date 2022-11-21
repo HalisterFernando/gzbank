@@ -3,12 +3,11 @@ import { GiMoneyStack } from 'react-icons/gi';
 import { getItem } from '../helpers/localStorage'
 import { setToken } from '../helpers/requests';
 import { requestData } from '../helpers/requests';
-import { userContext, UserContextType } from '../context/UserContext';
 import replaceDotToComa from '../helpers/replace';
 
 function Balance() {
 
-  const {user} = useContext(userContext) as UserContextType
+  
   const [userBalance, setUserBalance] = useState('');
 
   useEffect(() => {
@@ -16,7 +15,7 @@ function Balance() {
     const getBalance = async () => {
       const token = getItem('token')
       setToken(token)
-      const {balance: {balance}} = await requestData(`/account/${user.username}`)
+      const {balance: {balance}} = await requestData(`/account`)
       setUserBalance(balance)
     }
     getBalance()

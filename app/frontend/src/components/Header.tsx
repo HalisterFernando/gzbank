@@ -1,10 +1,19 @@
-import React, {useContext} from 'react'
+import React, {useContext, useEffect} from 'react'
 import Links from './Links'
 import { userContext, UserContextType } from '../context/UserContext'
+import { getItem } from '../helpers/localStorage'
 
 const Header = () => {
-
-  const { user } = useContext(userContext) as UserContextType
+  
+  const {user, saveUserData} = useContext(userContext) as UserContextType
+  
+  useEffect(() => {
+    const localStorageUser = getItem('user')
+    if (localStorageUser) {
+      const {id, username, accountId} = localStorageUser
+      saveUserData(id, username, accountId)
+    }
+  })
 
   return (
     <header className="
