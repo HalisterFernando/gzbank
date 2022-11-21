@@ -6,10 +6,16 @@ export interface IUser {
     accountId: number | null;
 }
 
+export interface IAmount {
+    amount: string
+}
+
 
 export type UserContextType = {
    user: IUser,
+   userAmount: IAmount
    saveUserData: (id: number, username: string, accountId: number) => void   
+   saveUserAmount: (amount: string) => void
 }
 
 interface Props {
@@ -27,14 +33,20 @@ const UserProvider: FC<Props> = ({children}) => {
         username: '',
         accountId: null
     });        
+
+    const [userAmount, setUserAmount] = useState<IAmount>({amount: ''})
     
     const saveUserData = (id: number, username: string, accountId: number) => {
         setUser({...user, id, username, accountId})
     }
+
+    const saveUserAmount = (amount: string) => {
+        setUserAmount({...userAmount, amount })
+    }
     
 
   return (
-    <userContext.Provider value={{user, saveUserData}}>
+    <userContext.Provider value={{user, userAmount, saveUserData, saveUserAmount}}>
         {children}
     </userContext.Provider>
   )
