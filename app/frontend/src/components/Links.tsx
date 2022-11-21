@@ -5,18 +5,18 @@ import { FaMoneyBillWave } from 'react-icons/fa';
 import { BiLogOut } from 'react-icons/bi';
 import useCheckPath from '../hooks/useCheckPath';
 import { useNavigate } from 'react-router-dom';
-// import { userContext, UserContextType } from '../context/UserContext';
+import { userContext, UserContextType } from '../context/UserContext';
 
 
 function Links() {
   const {path: {transaction, balance, transfer}} = useCheckPath();
-  // const {user} = useContext(userContext) as UserContextType
+  const {user} = useContext(userContext) as UserContextType
   const history = useNavigate()
   
   
   return (
     <>       
-    <span className="flex flex-col items-center mb-2 gap-1" onClick={() => history(`/transaction`)}>
+    <span className="flex flex-col items-center mb-2 gap-1" onClick={() => history(`/transaction/history/${user.id}`)}>
       <i className={ transaction ? "icon-pink" : "icon-green" }
       >
         <BiTransfer />
@@ -42,7 +42,7 @@ function Links() {
           Transferir
       </span>
     </span>
-    <span className="flex flex-col items-center mb-2 gap-1" >
+    <span className="flex flex-col items-center mb-2 gap-1" onClick={() => history('/login')}>
       <i className="icon-red"
       >
         <BiLogOut />

@@ -13,6 +13,7 @@ type transfer = {
 export interface ITransactionService {
     cashOut(data: transfer): Promise<ITransaction>
     getById(id: number): Promise<ITransaction[]>
+    list(): Promise<ITransaction[]>
 }
 
 export default class TransactionService implements ITransactionService {
@@ -60,9 +61,14 @@ export default class TransactionService implements ITransactionService {
         const allTransactions = await this.getAllTransactions()
         const userTransactions = allTransactions
         .filter((
-            {creditedAccountId, debitedAccountId}
+            { creditedAccountId, debitedAccountId }
             ) => creditedAccountId === Number(id) || debitedAccountId === Number(id));
 
         return userTransactions
+    }
+
+    async list(): Promise<ITransaction[]> {
+        const allTransactions = await this.getAllTransactions()
+        return allTransactions
     }
 }
