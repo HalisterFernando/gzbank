@@ -7,10 +7,14 @@ import SigninRouter from './database/routers/SigninRouter';
 import AccountRouter from './database/routers/AccountRouter';
 import TransactionRouter from './database/routers/TransactionRouter';
 
+const cors = require('cors');
+
 const PORT = process.env.APP_PORT;
 
 
 const app = express();
+
+app.use(cors())
 app.use(express.json())
 
 
