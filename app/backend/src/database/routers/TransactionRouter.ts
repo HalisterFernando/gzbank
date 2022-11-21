@@ -11,8 +11,9 @@ const transactionController = new TransactionController(transactionService);
 
 const router = Router()
 
-router.post('/', TransactionValidate, transactionController.cashOut);
-router.get('/', transactionController.list)
+
+router.post('/',TransactionValidate, transactionController.cashOut);
+router.get('/history/:id', transactionController.getById)
 
 
 export default router
