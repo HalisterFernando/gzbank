@@ -9,8 +9,9 @@ const accountService = new AccountService();
 const accountController = new AccountController(accountService);
 
 const router = Router()
-
-router.get('/', JwtValidate, accountController.account);
+router.use(JwtValidate)
+router.get('/:username', accountController.account);
+router.get('/transfer/:username', accountController.list)
 
 
 export default router
