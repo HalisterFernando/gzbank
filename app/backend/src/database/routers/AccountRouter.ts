@@ -10,8 +10,8 @@ const accountController = new AccountController(accountService);
 
 const router = Router()
 router.use(JwtValidate)
-router.get('/:username', accountController.account);
-router.get('/transfer/:username', accountController.list)
+router.get('/', accountController.account);
+router.get('/transfer', accountController.list)
 
 
 export default router
