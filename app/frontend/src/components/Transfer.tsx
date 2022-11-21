@@ -1,12 +1,23 @@
-import React, { useState, ChangeEvent, useEffect, FormEvent } from 'react'
+import React, { useState, ChangeEvent, useEffect, FormEvent, useContext } from 'react'
+
 import { GiPayMoney } from 'react-icons/gi'
+import {userContext, UserContextType } from '../context/UserContext';
+import { requestData } from '../helpers/requests';
+import { getItem } from '../helpers/localStorage';
+import { setToken } from '../helpers/requests'
 
 function Transfer() {
+
+    const { user } = useContext(userContext) as UserContextType
 
     const [transfer, setTransfer] = useState({
         username: '',
         amount: '',
     })
+
+    const [accounts, setAccounts] = useState([])
+
+         
     const { username, amount } = transfer;
 
     const [isDisabled, setIsDisabled] = useState(true)
@@ -44,6 +55,17 @@ function Transfer() {
     useEffect(() => {
         validateAmount()
     }, [transfer])
+
+    useEffect(() => {
+        const getAccounts = async () => {
+            const token = getItem('token')
+            setToken(token)
+            const allAcounts = await requestData(`/account/transfer/${user.username}`);
+            setAccounts(allAcounts)
+        }
+
+        getAccounts()
+    }, [])
 
   return (
     <div className='min-h-[550px] flex justify-center items-center'>
@@ -93,8 +115,9 @@ function Transfer() {
                         max-w-xs"
                 >
                     <option disabled selected>Selecione um usuário</option>
-                    <option value="Han Solo">Han Solo</option>
-                    <option value="Greedo">Greedo</option>
+                    {accounts.length && accounts.map(({username}) => (
+                        <option value={username}>{username}</option>
+                    ))}
                 </select>
                 <label 
                     htmlFor='ammount' 

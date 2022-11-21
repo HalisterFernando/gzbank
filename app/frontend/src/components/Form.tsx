@@ -1,31 +1,49 @@
-import React from 'react'
-import { FormikValues, useFormik } from 'formik'
-import Loading from './Loading'
-import validationSchema from '../validations/yupSchemas'
-import useLoading from '../hooks/useLoading'
+import React, { useContext } from 'react';
+import { useFormik } from 'formik';
+import Loading from './Loading';
+import validationSchema from '../validations/yupSchemas';
+import useLoading from '../hooks/useLoading';
+import { useNavigate } from 'react-router-dom';
+import { requestPost } from '../helpers/requests';
+import {setItem} from '../helpers/localStorage'
+import { userContext, UserContextType } from '../context/UserContext';
 
 
 
 
-const initialValues = {
-    username: '',
-    password: '',    
-  }
+const Form = () => {
+  const { saveUserData } = useContext(userContext) as UserContextType;
+  const history = useNavigate();
+  const { loading } = useLoading();
+  const loginPath = window.location.href.includes('login'); 
+  
+  const initialValues = {
+      username: '',
+      password: '',    
+    }
 
-const Form = ({onSubmit}: FormikValues) => {
-   
-    const { loading } = useLoading();
-    
-    const path = window.location.href.includes('login'); 
-    const formik = useFormik({
-        initialValues,
-        validationSchema,
-        onSubmit
-    });    
+  const formik = useFormik({
+      initialValues,
+      validationSchema,
+      onSubmit: async (values) => {
+        const {username, password} = values
+        
+        if (loginPath) {
+          const token = await requestPost('/login', {username, password})
+           // const [userData] = await requestData('/user')      
+          setItem('token', token);
+          saveUserData(username)
+        } else {
+          const response = await requestPost('/signin', {username, password})
+          console.log(response)
+        }
 
-    const usernameProps = formik.getFieldProps("username");
-    const passwordProps = formik.getFieldProps("password");
+        return loginPath ? history(`/balance/${username}`) : history('/login')
+      }
+  });    
 
+  const usernameProps = formik.getFieldProps("username");
+  const passwordProps = formik.getFieldProps("password");
 
      
   return (
@@ -45,7 +63,7 @@ const Form = ({onSubmit}: FormikValues) => {
            '>
               <h1 className='text-center text-white font-semibold'>Bem-vindo ao NG_APP</h1>
               <h2 className='text-center text-white font-semibold mt-5'>
-              {path ? "Realize o login" : "Crie sua conta"}
+              {loginPath ? "Realize o login" : "Crie sua conta"}
               </h2>
               <form onSubmit={formik.handleSubmit} className='mt-5'>
                 <label htmlFor="" className='text-white font-semibold'>Nome de usuário</label>
@@ -99,7 +117,7 @@ const Form = ({onSubmit}: FormikValues) => {
                         hover:bg-ng-green
                         
                         ">
-                          {path ? "Login" : "Criar Conta"}
+                          {loginPath ? "Login" : "Criar Conta"}
                     </button>
                 </div>
               </form>

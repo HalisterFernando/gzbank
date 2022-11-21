@@ -1,7 +1,11 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import Links from './Links'
+import { userContext, UserContextType } from '../context/UserContext'
 
 const Header = () => {
+
+  const { user } = useContext(userContext) as UserContextType
+
   return (
     <header className="
     bg-black
@@ -13,7 +17,7 @@ const Header = () => {
     justify-evenly
     gap-2
     ">
-        <span className='text-white font-semibold'>Olá Usuário</span>
+        <span className='text-white font-semibold'>Olá {user.username}</span>
        <div className='flex gap-4'>
         <Links />
        </div>
