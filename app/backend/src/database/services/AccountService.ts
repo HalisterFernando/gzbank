@@ -24,7 +24,7 @@ export default class AccountService implements IAccountService {
             .map(({id}) => User.findOne({
                 where: {accountId: id}, 
                 attributes: { 
-                    exclude: ["id", "password", "accountId"]
+                    exclude: ["id", "password"]
                 }})
             .then((account) => account!.toJSON())))
         

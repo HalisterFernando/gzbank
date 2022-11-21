@@ -115,8 +115,8 @@ function Transfer() {
                         max-w-xs"
                 >
                     <option disabled selected>Selecione um usuário</option>
-                    {accounts.length && accounts.map(({username}) => (
-                        <option value={username}>{username}</option>
+                    {accounts.length && accounts.map(({accountId, username}) => (
+                        <option id={accountId} value={username}>{username}</option>
                     ))}
                 </select>
                 <label 

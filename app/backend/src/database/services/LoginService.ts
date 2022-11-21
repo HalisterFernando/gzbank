@@ -7,7 +7,12 @@ export interface ILoginService  {
 
 export default class LoginService implements ILoginService {
     private userLogin = async (username: string): Promise<IUser | null> => {
-        const user = await User.findOne({where: {username}})
+        const user = await User.findOne({
+            where: {username},
+            attributes: {
+                exclude: ['password']
+            }
+        })
         return user
     }
 

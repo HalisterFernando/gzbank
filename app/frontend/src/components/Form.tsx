@@ -29,10 +29,14 @@ const Form = () => {
         const {username, password} = values
         
         if (loginPath) {
-          const token = await requestPost('/login', {username, password})
-           // const [userData] = await requestData('/user')      
-          setItem('token', token);
-          saveUserData(username)
+          const response = await requestPost('/login', {username, password})
+          setItem('token', response.token);
+
+          saveUserData(
+            response.userData.id, 
+            response.userData.username, 
+            response.userData.accountId
+            )
         } else {
           const response = await requestPost('/signin', {username, password})
           console.log(response)

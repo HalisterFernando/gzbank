@@ -1,13 +1,15 @@
 import React, {createContext, useState, ReactNode, FC} from 'react';
 
 export interface IUser {
-    username: string,
+    id: number | null;
+    username: string;
+    accountId: number | null;
 }
 
 
 export type UserContextType = {
-   user: IUser
-   saveUserData: (username: string) => void   
+   user: IUser,
+   saveUserData: (id: number, username: string, accountId: number) => void   
 }
 
 interface Props {
@@ -21,11 +23,13 @@ export const userContext = createContext<UserContextType | null>(null);
 const UserProvider: FC<Props> = ({children}) => {
 
     const [user, setUser] = useState<IUser>({
-        username: ''
+        id: null,
+        username: '',
+        accountId: null
     });        
     
-    const saveUserData = (username: string) => {
-        setUser({...user, username})
+    const saveUserData = (id: number, username: string, accountId: number) => {
+        setUser({...user, id, username, accountId})
     }
     
 
