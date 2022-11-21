@@ -10,7 +10,7 @@ const loginController = new LoginController(loginService);
 
 const router = Router()
 
-router.get('/', LoginValidate, loginController.login);
+router.post('/', LoginValidate, loginController.login);
 
 
 export default router

@@ -6,7 +6,7 @@ import db from '.';
 
 export default class Account extends Model {
   id!: number;
-  value!: number;
+  balance!: number;
 }
 
 Account.init({

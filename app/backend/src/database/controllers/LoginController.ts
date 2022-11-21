@@ -10,7 +10,7 @@ export default class LoginController {
     login = async ( req: Request, res: Response) => {
         const { username } = req.body  
         await this.userService.login(username);
-        const token = jwt.sign({username})
+        const token = jwt.sign({username})        
         return res.status(StatusCodes.OK).json(token)
     }   
 }

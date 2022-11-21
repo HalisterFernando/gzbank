@@ -1,4 +1,4 @@
 export default interface IAccount {
     id: number,
-    balance: string, 
+    balance: number, 
 }
