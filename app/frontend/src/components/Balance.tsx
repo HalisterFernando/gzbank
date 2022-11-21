@@ -4,11 +4,12 @@ import { getItem } from '../helpers/localStorage'
 import { setToken } from '../helpers/requests';
 import { requestData } from '../helpers/requests';
 import replaceDotToComa from '../helpers/replace';
+import { userContext, UserContextType } from '../context/UserContext'
 
 function Balance() {
 
-  
-  const [userBalance, setUserBalance] = useState('');
+   
+  const { userAmount, saveUserAmount } =  useContext(userContext) as UserContextType
 
   useEffect(() => {
    
@@ -16,7 +17,7 @@ function Balance() {
       const token = getItem('token')
       setToken(token)
       const {balance: {balance}} = await requestData(`/account`)
-      setUserBalance(balance)
+      saveUserAmount(balance)
     }
     getBalance()
   }, [])  
@@ -40,7 +41,7 @@ function Balance() {
             <div className="card-body flex flex-col justify-between items-center gap-8">
                 <h2 className="card-title text-white font-semibold text-xl">Saldo atual</h2>
                 <i className="text-[100px] text-white"> <GiMoneyStack /></i>
-                <p className='text-white font-semibold text-xl'>R$: {replaceDotToComa(userBalance)}</p>               
+                <p className='text-white font-semibold text-xl'>R$: {replaceDotToComa(userAmount.amount)}</p>               
             </div>
         </div>
     </div>
