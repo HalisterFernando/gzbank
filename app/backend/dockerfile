@@ -1,8 +1,7 @@
 FROM node:16.14-alpine
-RUN mkdir -p /app-backend
-WORKDIR /app-backend
-COPY package.json /app-backend/
+WORKDIR /app-frontend
+COPY . .
 RUN npm install
-COPY . /app-backend/
+COPY . .
 EXPOSE 3000
-CMD ["npm", "run", "db:reset"]
+CMD [ "npm", "start" ] 
