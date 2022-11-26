@@ -7,11 +7,11 @@ import Transaction from '../components/Transaction';
 const TransactionPage = () => {  
 
   return (
-    <>          
+    <div className='h-screen flex flex-col'>          
       <Header />
       <Transaction />
       <PageFooter />      
-    </>
+    </div>
   )
 }
 

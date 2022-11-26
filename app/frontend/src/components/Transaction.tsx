@@ -81,9 +81,9 @@ const Transaction = () => {
     return allTransactions.map((transaction) => (
       <div 
         key={transaction.id}
-        className='p-2 m-4 border border-black rounded-md '
+        className='p-2 m-4 border border-white rounded-md '
       >
-        <div className='px-2 flex flex-col'>
+        <div className='px-2 flex flex-col text-white'>
             {
           transaction.creditedAccountId === user.accountId ? 
           (<span>Valor recebido R$: {transaction.value}</span>) :
@@ -100,20 +100,31 @@ const Transaction = () => {
   }
 
   return (
-    <div className='min-h-[550px]'>
-      <div className="mt-4">
-         <h2 className='text-center'>Filtrar por</h2>
-         <form action="" className='flex flex-col px-4 gap-2'>
-          <label htmlFor="">Tipo de transação</label>          
+    <div className='h-full flex justify-center items-start bg-black border-y-2 border-white overflow-y-auto'>
+       <div className="                                        
+          w-3/4
+          flex           
+          flex-col 
+          items-center
+          justify-around
+          gap-2      
+          "
+        > 
+         <h2 className='text-center text-white text-2xl font-semibold mt-2'>Filtrar por</h2>
+         
+          <label className='text-white' htmlFor="">Tipo de transação</label>          
           <select name="type" id="" className='mb-2 rounded-md' onChange={handleChange}>
             <option value="all">Todas as transições</option>
             <option value="cash-in">Recebeu dinheiro</option>
             <option value="cash-out">Transferiu dinheiro</option>
           </select>
-          <label htmlFor=''>Data da transação</label>          
-          <input type="date" className='rounded-md' onChange={handleDate} />
-         </form>
+          <label className='text-white' htmlFor=''>Data da transação</label>          
+          <input type="date" className='rounded-md w-[205px]' onChange={handleDate} />
+         
+         
+
          {renderTransactions()}
+         
       </div>
     </div>
   )
