@@ -31,7 +31,7 @@ function Balance() {
           flex 
           flex-col 
           items-center
-          justify-around          
+          justify-around      
           "
         >            
             <h2 className="text-white font-semibold text-4xl">Saldo atual</h2>

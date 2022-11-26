@@ -93,7 +93,7 @@
   .hidden-transfer-alert {
     @apply
 
-    bg-ng-pink
+    bg-ng-green
     p-2
     rounded-md
     font-semibold
@@ -104,7 +104,7 @@
   .show-transfer-alert {
     @apply
 
-    bg-ng-pink
+    bg-ng-green
     p-2
     rounded-md
     font-semibold

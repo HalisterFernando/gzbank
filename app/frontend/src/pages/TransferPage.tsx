@@ -7,11 +7,11 @@ import Transfer from '../components/Transfer';
 const TransferPage = () => {  
 
   return (
-    <>          
+    <div className='h-screen flex flex-col'>          
       <Header />
       <Transfer />
       <PageFooter />      
-    </>
+    </div>
   )
 }
 

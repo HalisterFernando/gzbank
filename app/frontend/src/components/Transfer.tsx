@@ -1,6 +1,6 @@
 import React, { useState, ChangeEvent, useEffect, FormEvent, useContext } from 'react'
 
-import { GiPayMoney } from 'react-icons/gi'
+import MoneyTransfer from '../images/transfer.png'
 import {userContext, UserContextType } from '../context/UserContext';
 import { requestData, requestPost } from '../helpers/requests';
 import { getItem } from '../helpers/localStorage';
@@ -95,31 +95,20 @@ function Transfer() {
     }, [])
 
   return (
-    <div className='min-h-[550px] flex justify-center items-center'>
-        <div className="
-            card 
-            w-[80%] 
-            h-[500px] 
-            bg-black 
-            rounded-lg 
-            p-4 
-            shadow-xl 
-            shadow-ng-green
-            flex
-            items-center        
-            "
-        >
-            <form 
-            onSubmit={ handleSubmit }
-            className="
-                card-body 
-                flex 
-                flex-col 
-                justify-between 
-                items-center 
-                gap-2
-                
-                ">
+    <div className='h-full flex justify-center items-center bg-black border-y-2 border-white'>
+      <form 
+        onSubmit={ handleSubmit }
+        className="
+          w-3/4
+          h-full           
+          flex 
+          flex-col 
+          items-center
+          justify-evenly          
+          "
+        > 
+                <img className='w-28' src={MoneyTransfer} alt="transferência" />
+           
                 <label 
                     htmlFor='username' 
                     className="card-title 
@@ -146,6 +135,7 @@ function Transfer() {
                         <option key={accountId} id={accountId} value={username}>{username}</option>
                     ))}
                 </select>
+
                 <label 
                     htmlFor='ammount' 
                     className="
@@ -166,7 +156,6 @@ function Transfer() {
                     placeholder='Escreva sem pontos ou vírgula' 
                 />
 
-                <i className="text-[100px] text-white"> <GiPayMoney /></i>
                 <span className={ hidden ? "hidden-transfer-alert" : "show-transfer-alert" }>
                     Transferência realizada com sucesso!
                 </span>
@@ -178,8 +167,7 @@ function Transfer() {
                     OK
                 </button>
                              
-            </form>
-        </div>
+            </form>        
     </div>
   )
 }
