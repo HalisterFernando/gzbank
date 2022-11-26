@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react'
-import { GiMoneyStack } from 'react-icons/gi';
+import MoneyBag from '../images/money-bag.png';
+
 import { getItem } from '../helpers/localStorage'
 import { setToken } from '../helpers/requests';
 import { requestData } from '../helpers/requests';
@@ -7,7 +8,6 @@ import replaceDotToComa from '../helpers/replace';
 import { userContext, UserContextType } from '../context/UserContext'
 
 function Balance() {
-
    
   const { userAmount, saveUserAmount } =  useContext(userContext) as UserContextType
 
@@ -24,25 +24,19 @@ function Balance() {
 
 
   return (
-    <div className='min-h-[550px] flex justify-center items-center'>
+    <div className='h-full flex justify-center items-center bg-black border-y-2 border-white'>
         <div className="
-        card 
-        w-[80%] 
-        h-64 
-        bg-black 
-        rounded-lg 
-        p-4 
-        shadow-xl 
-        shadow-ng-green
-        flex
-        items-center        
-        "
-        >
-            <div className="card-body flex flex-col justify-between items-center gap-8">
-                <h2 className="card-title text-white font-semibold text-xl">Saldo atual</h2>
-                <i className="text-[100px] text-white"> <GiMoneyStack /></i>
-                <p className='text-white font-semibold text-xl'>R$: {replaceDotToComa(userAmount.amount)}</p>               
-            </div>
+          w-3/4 
+          h-3/4                
+          flex 
+          flex-col 
+          items-center
+          justify-around          
+          "
+        >            
+            <h2 className="text-white font-semibold text-4xl">Saldo atual</h2>
+            <img src={MoneyBag} alt="saco de dinheiro" />
+            <p className='font-semibold text-white text-4xl'>R$: {replaceDotToComa(userAmount.amount)}</p>            
         </div>
     </div>
   )

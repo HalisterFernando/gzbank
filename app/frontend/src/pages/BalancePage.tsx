@@ -7,11 +7,11 @@ import Balance from '../components/Balance';
 const BalancePage = () => {  
 
   return (
-    <>          
+    <div className='h-screen flex flex-col'>          
       <Header />
       <Balance />
       <PageFooter />      
-    </>
+    </div>
   )
 }
 
