@@ -4,42 +4,79 @@ import React, { useEffect, useState } from 'react'
 
 const useCheckPath = () => {
 
-    const balancePath = window.location.href.includes('balance');
-    const transactionPath = window.location.href.includes('transaction');
-    const transferPath = window.location.href.includes('transfer');
+    const balance = window.location.href.includes('balance');
+    const transaction = window.location.href.includes('transaction');
+    const transfer = window.location.href.includes('transfer');
+    const login = window.location.href.includes('login');
+    const signin = window.location.href.includes('signin');
 
     const [path, setPath] = useState({
         balance: false,
         transaction: false,
-        transfer: false
+        transfer: false,
+        login: false,
+        signin: false
     })
 
     useEffect(() => {
-        if (balancePath) {
-            setPath({
-                ...path, 
-                balance: true, 
-                transaction: false, 
-                transfer: false
-            })
-        }
-        if (transactionPath) {
-            setPath({
-                ...path, 
-                balance: false, 
-                transaction: true, 
-                transfer: false
-            })
-        }
-        if (transferPath) {
-            setPath({
-                ...path, 
-                balance: false,
-                transaction: false,
-                transfer: true
-            })
-        }
-    }, [balancePath, transactionPath, transferPath])
+        
+        switch (true) {
+            case balance:
+                return setPath({
+                    ...path, 
+                    balance, 
+                    transaction, 
+                    transfer,
+                    login,
+                    signin
+                });
+            case transaction:
+                return  setPath({
+                    ...path, 
+                    balance, 
+                    transaction, 
+                    transfer,
+                    login,
+                    signin
+                });      
+            case transfer:
+                return  setPath({
+                    ...path, 
+                    balance, 
+                    transaction, 
+                    transfer,
+                    login,
+                    signin
+                });
+            case login:
+                return setPath({
+                    ...path,
+                    balance,
+                    transaction,
+                    transfer,
+                    login,
+                    signin
+                });
+            case signin:
+                return setPath({
+                    ...path,
+                    balance,
+                    transaction,
+                    transfer,
+                    login,
+                    signin
+                });      
+            default:
+                return setPath({
+                    ...path, 
+                    balance, 
+                    transaction, 
+                    transfer,
+                    login,
+                    signin
+                });
+        }      
+    }, [])
 
   return {path}
 }
