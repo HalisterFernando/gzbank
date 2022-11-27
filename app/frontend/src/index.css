@@ -111,4 +111,27 @@
     text-center    
   }
 
+  .hidden-signin-btn {
+    @apply
+
+    btn
+    btn-active
+    bg-ng-pink
+    text-xl
+    font-bold
+    text-white
+    hidden
+  }
+
+  .show-signin-btn {
+    @apply
+
+    btn
+    btn-active
+    bg-ng-pink
+    text-xl
+    font-bold
+    text-white
+  }
+
 }
