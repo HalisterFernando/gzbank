@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { useFormik } from 'formik';
+import useCheckPath from '../hooks/useCheckPath';
 import Loading from './Loading';
 import validationSchema from '../validations/yupSchemas';
 import useLoading from '../hooks/useLoading';
@@ -15,7 +16,7 @@ const Form = () => {
   const { saveUserData } = useContext(userContext) as UserContextType;
   const history = useNavigate();
   const { loading } = useLoading();
-  const loginPath = window.location.href.includes('login'); 
+  const {path: {login}} = useCheckPath();
   
   const initialValues = {
       username: '',
@@ -28,7 +29,7 @@ const Form = () => {
       onSubmit: async (values) => {
         const {username, password} = values
         
-        if (loginPath) {
+        if (login) {
           const response = await requestPost('/login', {username, password})
           setItem('token', response.token);
           setItem('user', response.userData);
@@ -39,10 +40,10 @@ const Form = () => {
             response.userData.accountId
             )
         } else {
-          const response = await requestPost('/signin', {username, password})          
+            await requestPost('/signin', {username, password})          
         }
 
-        return loginPath ? history(`/balance`) : history('/login')
+        return login ? history(`/balance`) : history('/login')
       }
   });    
 
@@ -67,7 +68,7 @@ const Form = () => {
            '>
               <h1 className='text-center text-white font-semibold'>Bem-vindo ao NG_APP</h1>
               <h2 className='text-center text-white font-semibold mt-5'>
-              {loginPath ? "Realize o login" : "Crie sua conta"}
+              {login ? "Realize o login" : "Crie sua conta"}
               </h2>
               <form onSubmit={formik.handleSubmit} className='mt-5'>
                 <label htmlFor="" className='text-white font-semibold'>Nome de usuário</label>
@@ -106,7 +107,14 @@ const Form = () => {
                         {formik.errors.password}
                     </div>
                 ): null}
-                <div className='w-full flex justify-center mt-8'>
+                <div className='w-full flex flex-col justify-center gap-4 mt-8'>
+                    <button
+                      type="button"
+                      className={login ? 'show-signin-btn' : 'hidden-signin-btn'}
+                      onClick={ () => history('/signin')}
+                    >
+                      Cadastrar
+                    </button>
                     <button 
                         type="submit"
                         disabled={!(formik.isValid && formik.dirty)}
@@ -117,11 +125,9 @@ const Form = () => {
                         w-full
                         text-xl
                         font-bold
-                        text-slate-200
-                        hover:bg-ng-green
-                        
+                        text-white                        
                         ">
-                          {loginPath ? "Login" : "Criar Conta"}
+                          {login ? "Login" : "Criar Conta"}
                     </button>
                 </div>
               </form>
