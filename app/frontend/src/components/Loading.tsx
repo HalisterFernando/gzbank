@@ -4,7 +4,7 @@ import React from 'react'
 
 const Loading = () => {
   return (
-    <div className='flex flex-col items-center justify-center h-screen bg-white'>
+    <div className='flex flex-col items-center justify-center h-full bg-white'>
       <div role="status">
             <svg className="
             inline 
