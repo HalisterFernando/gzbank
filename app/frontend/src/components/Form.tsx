@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { requestPost } from '../helpers/requests';
 import {setItem} from '../helpers/localStorage'
 import { userContext, UserContextType } from '../context/UserContext';
+import { ImKey, ImUser } from 'react-icons/im'
 
 
 
@@ -16,7 +17,7 @@ const Form = () => {
   const { saveUserData } = useContext(userContext) as UserContextType;
   const history = useNavigate();
   const { loading } = useLoading();
-  const {path: {login}} = useCheckPath();
+  const {path: {login, signin}} = useCheckPath();
   
   const initialValues = {
       username: '',
@@ -52,26 +53,29 @@ const Form = () => {
 
      
   return (
-    <div className='flex flex-col items-center justify-center h-screen bg-white'>
+    <div className='flex flex-col items-center justify-center h-screen bg-white border-y-2 border-white'>
       {
       loading ? ( <Loading /> ) : 
-      (
-      <>       
-        <div className='
-            w-[85%] 
-            min-h-96
-            border
-            border-ng-pink
+      (        
+        <form 
+          onSubmit={formik.handleSubmit}
+          className='     
+            w-full       
+            h-full           
             rounded-sm
             bg-black
             p-4
            '>
-              <h1 className='text-center text-white font-semibold'>Bem-vindo ao NG_APP</h1>
-              <h2 className='text-center text-white font-semibold mt-5'>
+             
+              <h2 className='text-center text-white text-xl font-bold my-5'>
               {login ? "Realize o login" : "Crie sua conta"}
-              </h2>
-              <form onSubmit={formik.handleSubmit} className='mt-5'>
-                <label htmlFor="" className='text-white font-semibold'>Nome de usuário</label>
+              </h2>             
+                <label htmlFor="" className='text-white font-semibold flex items-center gap-2'>
+                  <i className='text-xl text-ng-green'>
+                    <ImUser />
+                  </i>
+                  Nome de usuário
+                </label>
                 <input                
                     type="text"                                
                     placeholder='Flávio Albuquerque'              
@@ -84,12 +88,18 @@ const Form = () => {
                     mb-4
                 '
                 />
-                {formik.touched.username && formik.errors.username ? (
-                    <div className='text-red-600 mb-4'>
-                        {formik.errors.username}
+                {signin && formik.touched.username && formik.errors.username ? (
+                    <div className='bg-ng-pink font-semibold rounded-md p-2 mb-4'>
+                        {signin && formik.errors.username}
                     </div>
                 ): null}
-                  <label htmlFor="" className='text-white font-semibold'>Senha</label>
+                  <label htmlFor="" className='text-white font-semibold flex items-center gap-2'>
+                    <i className='text-xl text-ng-green'>
+                      <ImKey />  
+                    </i>
+                    Senha
+                  </label>
+                
                 <input 
                     type="password" 
                     placeholder='S3nha123'                
@@ -102,9 +112,9 @@ const Form = () => {
                     mb-4
                     '
                 />
-                  {formik.touched.password && formik.errors.password ? (
-                    <div className='text-red-600'>
-                        {formik.errors.password}
+                  {signin && formik.touched.password && formik.errors.password ? (
+                    <div className='bg-ng-pink font-semibold rounded-md p-2 mb-4'>
+                        {signin && formik.errors.password}
                     </div>
                 ): null}
                 <div className='w-full flex flex-col justify-center gap-4 mt-8'>
@@ -129,10 +139,9 @@ const Form = () => {
                         ">
                           {login ? "Login" : "Criar Conta"}
                     </button>
-                </div>
-              </form>
-        </div>
-        </>
+                </div>              
+        </form>
+        
       ) 
       }
        
