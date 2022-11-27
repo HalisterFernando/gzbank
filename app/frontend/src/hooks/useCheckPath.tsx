@@ -76,7 +76,7 @@ const useCheckPath = () => {
                     signin
                 });
         }      
-    }, [])
+    }, [login, transfer, balance, signin, transaction])
 
   return {path}
 }
