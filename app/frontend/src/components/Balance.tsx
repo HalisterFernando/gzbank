@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react'
+import React, { useEffect, useContext } from 'react'
 import MoneyBag from '../images/money-bag.png';
 
 import { getItem } from '../helpers/localStorage'
