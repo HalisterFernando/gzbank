@@ -20,7 +20,7 @@ module.exports = {
       },
     
       accountId: {
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
         allowNull: false,
         field: 'account_id'
       }

@@ -26,7 +26,7 @@ User.init({
   },
 
   accountId: {
-    type: STRING,
+    type: INTEGER,
     allowNull: false,
     references: {
         model: Account,
