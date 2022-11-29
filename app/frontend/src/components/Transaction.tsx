@@ -64,20 +64,22 @@ const Transaction = () => {
   const renderTransactions = () => {    
     const { cashIn, cashOut } = transactionType
 
-    let allTransactions = transactions;
+    let allTransactions = [...transactions];
     
     if (cashIn) {
-      allTransactions = transactions.filter(({creditedAccountId}) => creditedAccountId === user.accountId)
+      
+      allTransactions = allTransactions.filter(({debitedAccountId}) => debitedAccountId !== user.accountId)
     }
+
     if (cashOut) {
-      allTransactions = transactions.filter(({debitedAccountId}) => debitedAccountId !== user.accountId)
+      allTransactions = allTransactions.filter(({debitedAccountId}) => debitedAccountId === user.accountId)
     }
 
     if (date) {
-      allTransactions = transactions.filter(({createdAt}) => createdAt.includes(date))
+      allTransactions = allTransactions.filter(({createdAt}) => createdAt.includes(date))
     }
-     console.log(allTransactions)
-    
+     
+    console.log(allTransactions)
     return allTransactions.map((transaction) => (
       <div 
         key={transaction.id}
