@@ -16,13 +16,15 @@ Transaction.init({
     autoIncrement: true,
   },
   debitedAccountId: {
-    type: NUMBER,
+    type: INTEGER,
     allowNull: false,
+    field: 'debited_account_id'
   },
 
   creditedAccountId: {
-    type: NUMBER,
+    type: INTEGER,
     allowNull: false,
+    field: 'credited_account_id'
   },
 
   value: {
@@ -31,12 +33,12 @@ Transaction.init({
   },
 
   createdAt: {
-    type: STRING
+    type: STRING,
+    field: 'created_at'
   }
 
 }, {
   sequelize: db,
-  modelName: 'transactions',
   underscored: true,
   tableName: 'Transactions',
   timestamps: false  

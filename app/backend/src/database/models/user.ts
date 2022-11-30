@@ -28,6 +28,7 @@ User.init({
   accountId: {
     type: INTEGER,
     allowNull: false,
+    field: 'account_id',
     references: {
         model: Account,
         key: 'id'
@@ -36,7 +37,6 @@ User.init({
 
 }, {
   sequelize: db,
-  modelName: 'users',
   underscored: true,
   tableName: 'Users',
   timestamps: false,
@@ -45,5 +45,11 @@ User.init({
 
 User.belongsTo(Account, {
     foreignKey: 'accountId',
-    as: 'accounts',    
+    as: 'account',    
 })
+
+Account.hasOne(User, {
+  sourceKey: 'id',
+  foreignKey: 'accountId',
+  as: 'user',
+});

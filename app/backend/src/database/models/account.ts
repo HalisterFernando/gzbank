@@ -21,15 +21,10 @@ Account.init({
 
 }, {
   sequelize: db,
-  modelName: 'accounts',
   tableName: 'Accounts',
   timestamps: false,
 });
 
-// Account.hasOne(User, {
-//     foreignKey: 'id',
-//     as: 'users'
-// })
 
 Account.hasMany(Transaction, {
     foreignKey: 'debitedAccountId',
