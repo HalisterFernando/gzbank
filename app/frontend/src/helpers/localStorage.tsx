@@ -10,3 +10,7 @@ export function getItem (key: string) {
     }
     return null
 }
+
+export function removeItem (key: string) {
+    return window.localStorage.removeItem(key)
+}
