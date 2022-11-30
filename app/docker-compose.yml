@@ -1,4 +1,4 @@
-version: "3"
+version: "3.9"
 
 services:
   frontend:
@@ -9,30 +9,42 @@ services:
     platform: linux/x86_64
     working_dir: /frontend
     depends_on:
-      - backend
+      backend:
+        condition: service_healthy
   backend:
     container_name: app_backend
     build: ./backend
     ports:
       - 3001:3001
     platform: linux/x86_64
-    working_dir: /backend
-    command: npm run dev
+    working_dir: /backend  
     depends_on:
-      - db
+      db: 
+        condition: service_healthy
     environment:
       - APP_PORT=3001
       - JWT_SECRET=jwt_secret
       - DB_USER=postgres
       - DB_PASS=123456
       - DB_HOST=db
-      - DB_PORT=5432
+      - DB_PORT=5432      
+    healthcheck:
+      test: ["CMD", "lsof", "-t", "-i:3001"]
+      timeout: 10s
+      retries: 5
   db:
-    image: postgres
+    image: postgres:15.1
     container_name: db
     platform: linux/x86_64
     ports:
       - 3002:5432
+    user: postgres
     environment:
-      - POSTGRES_PASSWORD=123456
-    restart: always
+      - POSTGRES_PASSWORD=123456      
+    restart: always  
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"] 
+      timeout: 10s
+      retries: 5
+    cap_add:
+      - SYS_NICE # Deve omitir alertas menores

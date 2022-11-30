@@ -5,11 +5,14 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npm run build && node ./build/app.js",
+    "prestart": "npm run build && npm run migrate",
+    "start": "node ./build/app.js",
     "dev": "nodemon --watch \"./src/**/\" ./src/app.ts",
     "migrate": "npx sequelize db:migrate",
+    "seed": "npx sequelize-cli db:seed:all",
     "build": "tsc",
-    "db:reset": "npx -y tsc && npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all"
+    "db:reset": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all"
+    
   },
   "keywords": [],
   "author": "",
