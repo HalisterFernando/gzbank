@@ -14,7 +14,7 @@ import { ImKey, ImUser } from 'react-icons/im'
 
 
 const Form = () => {
-  const { saveUserData } = useContext(userContext) as UserContextType;
+  const { user, saveUserData } = useContext(userContext) as UserContextType;
   const history = useNavigate();
   const { loading } = useLoading();
   const {path: {login, signin}} = useCheckPath();
@@ -44,7 +44,7 @@ const Form = () => {
             await requestPost('/signin', {username, password})          
         }
 
-        return login ? history(`/balance`) : history('/login')
+        return login ? history(`/balance/${user.accountId}`) : history('/login')
       }
   });    
 

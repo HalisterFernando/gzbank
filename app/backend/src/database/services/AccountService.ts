@@ -4,40 +4,38 @@ import Account from "../models/account";
 import User from "../models/user";
 
 export interface IAccountService {
-    account(username: string): Promise <IAccount | unknown>
-    list(username: string): Promise<IUser[]>
+    account(accountId: number): Promise <IAccount | null>
+    list(accountId: number): Promise<IUser[]>
 }
 
 export default class AccountService implements IAccountService {
-    getBalance = async (username: string): Promise<IAccount | unknown> => {
-        const user = await  User.findOne({where: {username}})
-        const balance = await Account.findByPk(user!.accountId);
+    getBalance = async (accountId: number): Promise<IAccount | null> => {
+        const balance = await Account.findByPk(accountId);
         return balance
 
     }
     
-    getAccounts = async (username: string): Promise<IUser[]> => {
-        const userAccount = await User.findOne({where: {username}});
+    getAccounts = async (userAccountId: number): Promise<IUser[] | any> => {             
         const allAccounts = await Account.findAll();
-        const filteredAccounts = allAccounts.filter((account) => account.id !== userAccount!.id)
+        const filteredAccounts = allAccounts.filter((account) => account.id !== userAccountId)
         const filteredUserAccounts = await Promise.all(filteredAccounts
-            .map(({id}) => User.findOne({
-                where: {accountId: id}, 
-                attributes: { 
-                    exclude: ["id", "password"]
-                }})
-            .then((account) => account!.toJSON())))
+            .map(async ({dataValues: {id}}) => {
+                const user = await User.findOne({
+                    where: {accountId: id}
+                })
+                return user
+            }))
         
         return filteredUserAccounts
     }
 
-    async account(username: string): Promise<IAccount | unknown> {
-        const balance = await this.getBalance(username)
+    async account(accountId: number): Promise<IAccount | null> {
+        const balance = await this.getBalance(accountId)
         return balance
     }
 
-    async list(username: string): Promise<IUser[]> {
-       const accounts = this.getAccounts(username);
+    async list(accountId: number): Promise<IUser[]> {
+       const accounts = this.getAccounts(accountId);
        return accounts
     }
 }

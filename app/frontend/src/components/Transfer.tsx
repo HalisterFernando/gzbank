@@ -75,7 +75,7 @@ function Transfer() {
         const getBalance = async () => {
           const token = getItem('token')
           setToken(token)
-          const {balance: {balance}} = await requestData(`/account`)
+          const {balance: {balance}} = await requestData(`/account/${user.accountId}`)
           saveUserAmount(balance)
         }
         getBalance()
@@ -86,7 +86,7 @@ function Transfer() {
         const getAccounts = async () => {
             const token = getItem('token')
             setToken(token)
-            const allAccounts = await requestData(`/account/transfer`);
+            const allAccounts = await requestData(`/account/transfer/${user.accountId}`);
             setAccounts(allAccounts)
             setTransfer({...transfer,accountId: allAccounts[0].accountId, username: allAccounts[0].username})
         }

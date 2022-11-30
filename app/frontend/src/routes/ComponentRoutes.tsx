@@ -13,9 +13,9 @@ const ComponentRoutes = () => {
         <Route path='*' element={ <Navigate to='/login' replace /> } />
         <Route path='/signin' element={ <FormPage /> } />
         <Route path='/login'  element={ <FormPage /> } />
-        <Route path='/balance' element={ <BalancePage />} />
-        <Route path='/transaction/history/:id' element={ <TransactionPage /> } />
-        <Route path='/transfer' element={ <TransferPage /> } />      
+        <Route path='/balance/:accountId' element={ <BalancePage />} />
+        <Route path='/transfer/:accountId' element={ <TransferPage /> } />      
+        <Route path='/transaction/history/:accountId' element={ <TransactionPage /> } />
       </Routes>
    
   )

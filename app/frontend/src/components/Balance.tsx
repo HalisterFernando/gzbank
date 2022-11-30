@@ -9,14 +9,14 @@ import { userContext, UserContextType } from '../context/UserContext'
 
 function Balance() {
    
-  const { userAmount, saveUserAmount } =  useContext(userContext) as UserContextType
+  const {user, userAmount, saveUserAmount } =  useContext(userContext) as UserContextType
 
   useEffect(() => {
    
     const getBalance = async () => {
       const token = getItem('token')
       setToken(token)
-      const {balance: {balance}} = await requestData(`/account`)
+      const {balance: {balance}} = await requestData(`/account/${user.accountId}`)
       saveUserAmount(balance)
     }
     getBalance()

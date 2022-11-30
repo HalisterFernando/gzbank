@@ -16,7 +16,7 @@ function Links() {
   
   return (
     <>       
-    <span className="flex flex-col items-center mb-2 gap-1" onClick={() => history(`/transaction/history/${user.id}`)}>
+    <span className="flex flex-col items-center mb-2 gap-1" onClick={() => history(`/transaction/history/${user.accountId}`)}>
       <i className={ transaction ? "icon-pink" : "icon-green" }
       >
         <BiTransfer />
@@ -24,7 +24,7 @@ function Links() {
       <span className={ transaction ? "link-pink" : "link-white" }>Transações</span>
     </span>
     
-    <span className="flex flex-col items-center mb-2 gap-1" onClick={() => history(`/balance`)}>
+    <span className="flex flex-col items-center mb-2 gap-1" onClick={() => history(`/balance/${user.accountId}`)}>
       <i className={ balance ? "icon-pink" : "icon-green" }
       >
         <MdAttachMoney />
@@ -33,7 +33,7 @@ function Links() {
           Saldo Atual
       </span>
     </span>
-    <span className="flex flex-col items-center mb-2 gap-1" onClick={() => history(`/transfer`)}>
+    <span className="flex flex-col items-center mb-2 gap-1" onClick={() => history(`/transfer/${user.accountId}`)}>
       <i className={ transfer ? "icon-pink" : "icon-green" }
       >
         <FaMoneyBillWave />
