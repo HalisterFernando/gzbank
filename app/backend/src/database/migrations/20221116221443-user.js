@@ -1,8 +1,8 @@
-'use strict';
-
+/* eslint-disable */
+'use-strict'
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up (queryInterface, Sequelize) {
+  async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Users', {
       id: {
         type: Sequelize.INTEGER,
@@ -13,25 +13,25 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-    
-        password: {
+
+      password: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-    
+
       accountId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         field: 'account_id',
         references: {
           model: 'Accounts',
-          key: 'id'
-        }
-      }
-    })
+          key: 'id',
+        },
+      },
+    });
   },
 
-  async down (queryInterface, Sequelize) {
-   await queryInterface.dropTable('Users')
-  }
+  async down(queryInterface, Sequelize) {
+    await queryInterface.dropTable('Users');
+  },
 };

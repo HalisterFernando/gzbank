@@ -5,7 +5,7 @@ import Account from './account';
 export default class User extends Model {
   id!: number;
   username!: string;
-  password!: string;  
+  password!: string;
   accountId!: number;
 }
 
@@ -20,7 +20,7 @@ User.init({
     allowNull: false,
   },
 
-    password: {
+  password: {
     type: STRING,
     allowNull: false,
   },
@@ -30,10 +30,10 @@ User.init({
     allowNull: false,
     field: 'account_id',
     references: {
-        model: Account,
-        key: 'id'
-    }
-  }
+      model: Account,
+      key: 'id',
+    },
+  },
 
 }, {
   sequelize: db,
@@ -42,11 +42,10 @@ User.init({
   timestamps: false,
 });
 
-
 User.belongsTo(Account, {
-    foreignKey: 'accountId',
-    as: 'account',    
-})
+  foreignKey: 'accountId',
+  as: 'account',
+});
 
 Account.hasOne(User, {
   sourceKey: 'id',

@@ -1,23 +1,23 @@
-import IUser from "../interfaces/IUser";
-import User from "../models/user";
+import IUser from '../interfaces/IUser';
+import User from '../models/user';
 
-export interface ILoginService  {
-    login(username: string): Promise<IUser | null>
+export interface ILoginService {
+  login(username: string): Promise<IUser | null>
 }
 
 export default class LoginService implements ILoginService {
-    private userLogin = async (username: string): Promise<IUser | null> => {
-        const user = await User.findOne({
-            where: {username},
-            attributes: {
-                exclude: ['password']
-            }
-        })
-        return user
-    }
+  private userLogin = async (username: string): Promise<IUser | null> => {
+    const user = await User.findOne({
+      where: { username },
+      attributes: {
+        exclude: ['password'],
+      },
+    });
+    return user;
+  };
 
-    async login(username: string): Promise<IUser | null> {
-        const user = await this.userLogin(username)
-        return user
-    }
+  async login(username: string): Promise<IUser | null> {
+    const user = await this.userLogin(username);
+    return user;
+  }
 }

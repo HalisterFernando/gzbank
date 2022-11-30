@@ -1,23 +1,23 @@
-'use strict';
-
+/* eslint-disable */
+'use-strict'
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up (queryInterface, Sequelize) {
+  async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Accounts', {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
-        autoIncrement: true
+        autoIncrement: true,
       },
-      
+
       balance: {
-        type: Sequelize.DECIMAL(12,2),
-        allowNull: false
-      }
-    })
+        type: Sequelize.DECIMAL(12, 2),
+        allowNull: false,
+      },
+    });
   },
 
-  async down (queryInterface, Sequelize) {
-    await queryInterface.dropTable('Accounts')
-  }
+  async down(queryInterface, _Sequelize) {
+    await queryInterface.dropTable('Accounts');
+  },
 };

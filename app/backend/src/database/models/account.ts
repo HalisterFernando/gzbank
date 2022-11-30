@@ -1,8 +1,6 @@
-import { DECIMAL } from 'sequelize';
-import { INTEGER, Model } from 'sequelize';
+import { DECIMAL, INTEGER, Model } from 'sequelize';
 import Transaction from './transaction';
 import db from '.';
-// import User from './user';
 
 export default class Account extends Model {
   id!: number;
@@ -16,8 +14,8 @@ Account.init({
     autoIncrement: true,
   },
   balance: {
-    type: DECIMAL(12,2)
-    }
+    type: DECIMAL(12, 2),
+  },
 
 }, {
   sequelize: db,
@@ -25,13 +23,12 @@ Account.init({
   timestamps: false,
 });
 
+Account.hasMany(Transaction, {
+  foreignKey: 'debitedAccountId',
+  as: 'debited_transactions',
+});
 
 Account.hasMany(Transaction, {
-    foreignKey: 'debitedAccountId',
-    as: 'debited_transactions'
-})
-
-Account.hasMany(Transaction, {
-    foreignKey: 'creditedAccountId',
-    as: 'credited_transactions'
-})
+  foreignKey: 'creditedAccountId',
+  as: 'credited_transactions',
+});

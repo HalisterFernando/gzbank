@@ -11,32 +11,25 @@ const cors = require('cors');
 
 const PORT = process.env.APP_PORT;
 
-
 const app = express();
 
-app.use(cors())
-app.use(express.json())
+app.use(cors());
+app.use(express.json());
 
+app.get('/', async (req, res) => res.status(200).send({ message: 'Servidor conectado' }));
 
-app.get('/', async (req, res) => {
-    return res.status(200).send({message: 'Servidor conectado'});
-})
-
-
-app.use('/user', UserRouter)
-app.use('/login', LoginRouter)
-app.use('/signin', SigninRouter)
-app.use('/account', AccountRouter)
-app.use('/transaction', TransactionRouter)
-
-
+app.use('/user', UserRouter);
+app.use('/login', LoginRouter);
+app.use('/signin', SigninRouter);
+app.use('/account', AccountRouter);
+app.use('/transaction', TransactionRouter);
 
 app.listen(PORT, () => {
-    try {
-        db.authenticate();
-        console.log('Deu bom')    
-    } catch (err) {
-        console.log('Deu ruim', err)
-    }
-    console.log('Ouvindo a porta', PORT)
-})
+  try {
+    db.authenticate();
+    console.log('Deu bom');
+  } catch (err) {
+    console.log('Deu ruim', err);
+  }
+  console.log('Ouvindo a porta', PORT);
+});
