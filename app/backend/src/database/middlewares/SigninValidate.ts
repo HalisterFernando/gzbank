@@ -18,7 +18,9 @@ export default async (req: Request, res: Response, next: NextFunction) => {
   const checkIfUserExists = await User.findOne({ where: { username } });
 
   if (checkIfUserExists) {
-    throw new Error('Este nome de usuário já existe');
+    const err = new Error('Este nome de usuário já existe');
+    err.name = 'UserAlreadyExists';
+    throw err;
   }
 
   const { error } = joi.object({
@@ -27,7 +29,9 @@ export default async (req: Request, res: Response, next: NextFunction) => {
   }).validate({ username, password });
 
   if (error) {
-    throw new Error(error.message);
+    const err = new Error(error.message);
+    err.name = 'JoiError';
+    throw err;
   }
 
   return next();

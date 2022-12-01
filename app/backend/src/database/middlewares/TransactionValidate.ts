@@ -9,10 +9,14 @@ export default async (req: Request, res: Response, next: NextFunction) => {
   if (accountToDebit && accountToCredit) {
     const { dataValues: { balance } } = accountToDebit;
     if (Number(balance) < Number(value)) {
-      throw new Error('Seu saldo não é suficiente para realizar a transferência');
+      const err = new Error('Seu saldo não é suficiente para realizar a transferência');
+      err.name = 'InsuficientBalance';
+      throw err;
     }
   } else {
-    throw new Error('Algo de errado não está certo');
+    const err = new Error('Erro interno');
+    err.name = 'InternalError';
+    throw err;
   }
 
   return next();

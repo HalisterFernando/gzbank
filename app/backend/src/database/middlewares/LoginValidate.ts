@@ -7,13 +7,17 @@ export default async (req: Request, res: Response, next: NextFunction) => {
   const user = await User.findOne({ where: { username } });
 
   if (!user) {
-    throw new Error('Usuário não encontrado');
+    const err = Error('Usuário ou senha inválidos');
+    err.name = 'UserNotFound';
+    throw err;
   }
 
   const isPasswordValid = await bcrypt.checkPassword(password, user.password);
 
   if (!isPasswordValid) {
-    throw new Error('Senha inválida');
+    const err = Error('Usuário ou senha inválidos');
+    err.name = 'UserNotFound';
+    throw err;
   }
 
   return next();
