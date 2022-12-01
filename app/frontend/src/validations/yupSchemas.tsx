@@ -1,6 +1,6 @@
 import * as yup from 'yup';
 
-const validationSchema = yup.object().shape({
+export const signinSchema = yup.object().shape({
     username: yup
     .string()
     .required("Campo obrigatório")
@@ -15,4 +15,11 @@ const validationSchema = yup.object().shape({
     )
 })
 
-export default validationSchema
+export const transferSchema = yup.object().shape({
+     amount: yup
+    .string()
+    .required("Campo obrigatório")
+    .min(1)
+    .matches(/^\d+$/g, "O valor não pode conter ponto ou vírgula")
+})
+

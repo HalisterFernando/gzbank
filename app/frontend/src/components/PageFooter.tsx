@@ -1,11 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const PageFooter = () => {
-  return (
-    <footer className='bg-black p-3 text-white'>
-        footer
-    </footer>
-  )
-}
+ return <footer className="bg-black p-3 text-white">footer</footer>;
+};
 
-export default PageFooter
+export default PageFooter;
