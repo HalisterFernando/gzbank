@@ -10,6 +10,6 @@ export default class SigninController {
     const { username, password } = req.body;
     const hashedPassword = await bcrypt.encryptPassword(password);
     const newUser = await this.userService.signin(username, hashedPassword);
-    return res.status(StatusCodes.OK).json(newUser);
+    return res.status(StatusCodes.CREATED).json(newUser);
   };
 }

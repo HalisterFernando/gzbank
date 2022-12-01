@@ -16,7 +16,7 @@ export default class TransactionController {
       value,
       createdAt,
     });
-    return res.status(StatusCodes.OK).json(newTransaction);
+    return res.status(StatusCodes.CREATED).json(newTransaction);
   };
 
   getById = async (req: Request, res: Response) => {
