@@ -17,7 +17,7 @@ function Balance() {
    setToken(token);
    const {
     balance: { balance },
-   } = await requestData(`/account/${user.accountId}`);
+   } = await requestData(`/balance/${user.accountId}`);
    saveUserAmount(balance);
   };
   getBalance();

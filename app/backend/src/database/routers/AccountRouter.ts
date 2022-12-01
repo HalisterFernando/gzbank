@@ -9,7 +9,7 @@ const accountController = new AccountController(accountService);
 
 const router = Router();
 router.use(JwtValidate);
-router.get('/:accountId', accountController.account); // saldo
-router.get('/transfer/:accountId', accountController.list); // transferência
+router.get('/:accountId', accountController.account);
+router.get('/transfer/:accountId', accountController.list);
 
 export default router;
