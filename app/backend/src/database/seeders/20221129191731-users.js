@@ -10,12 +10,12 @@ module.exports = {
         {
           username: 'Halister Fernando',
           password: '$2b$10$7gZHnYYLnXn9TgG/uGbgBuZ.65mzWT/OqcC8MY3YeIn3Oax0kImXO',
-          accountId: 1,
+          account_id: 1,
         },
         {
           username: 'Priscila Franzin',
           password: '$2b$10$qRlNSWaVvYitQAvEgZZpi.LOh3KJrzHMhrChuIMGoDsOAiP0pR0de',
-          accountId: 2,
+          account_id: 2,
         },
       ],
     );
