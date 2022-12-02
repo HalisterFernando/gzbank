@@ -3,7 +3,7 @@
 Esta aplicação é uma carteira digital, onde o usuário pode realizar transações entre os usuários e conferir o 
 histórico das mesmas.
 
-# Tecnologias utilizadas
+# Tecnologias utilizadas :computer:
 
 ## Front-end
 
@@ -22,7 +22,7 @@ histórico das mesmas.
 - Express
 
 
-## Instalando Dependências e Iniciando a Aplicação
+## Instalando dependências e iniciando a aplicação :rocket:
 Para rodar a aplicação é necessário ter o docker instalado, caso queira
 rodar localmente, inicie um container com o postgres
 ```bash
@@ -40,7 +40,7 @@ Caso prefira rodar pelo docker
 cd app
 docker-compose up -d --build
 ```
-Acessar a aplicação pelo endereço https://localhost:3000/ em seu navegador
+Assim que os containers subirem acesse aplicação pelo endereço https://localhost:3000/ em seu navegador
 
 Para encerrar os containers
 ```bash
