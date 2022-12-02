@@ -3,6 +3,7 @@ import Links from "./Links";
 import { userContext, UserContextType } from "../context/UserContext";
 import { getItem } from "../helpers/localStorage";
 import useCheckPath from "../hooks/useCheckPath";
+import GZBank from "../images/GZBank.png";
 
 const Header = () => {
  const { user, saveUserData } = useContext(userContext) as UserContextType;
@@ -32,9 +33,10 @@ const Header = () => {
     "
   >
    {login || signin ? (
-    <span>
-     <h1 className="text-white text-xl font-bold">Seja bem-vindo ao NG_APP</h1>
-    </span>
+    <div className="flex items-center gap-2">
+     <h1 className="text-white text-lg font-bold">Seja bem-vindo ao GZBank</h1>
+     <img className="h-[50px]" src={GZBank} alt="Logo GZBank"/>
+    </div>
    ) : (
     <>
      <span className="text-white font-semibold mt-1">Olá {user.username}</span>
