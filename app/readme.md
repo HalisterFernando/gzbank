@@ -40,8 +40,11 @@ Caso prefira rodar pelo docker
 cd app
 docker-compose up -d --build
 ```
+Acessar a aplicação pelo endereço https://localhost:3000/ em seu navegador
+
 Para encerrar os containers
 ```bash
 cd app
 docker-compose down
 ```
+
