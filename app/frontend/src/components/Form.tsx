@@ -5,15 +5,17 @@ import Loading from "./Loading";
 import { signinSchema } from "../validations/yupSchemas";
 import useLoading from "../hooks/useLoading";
 import { useNavigate } from "react-router-dom";
-import { requestPost } from "../helpers/requests";
 import { setItem } from "../helpers/localStorage";
 import { userContext, UserContextType } from "../context/UserContext";
 import { ImKey, ImUser } from "react-icons/im";
+import useAxios from "../hooks/useAxios";
 
 const Form = () => {
  const { user, saveUserData } = useContext(userContext) as UserContextType;
+ const { requestPost, errorMessage } = useAxios()
  const history = useNavigate();
  const { loading } = useLoading();
+ 
  const {
   path: { login, signin },
  } = useCheckPath();
@@ -30,17 +32,21 @@ const Form = () => {
    const { username, password } = values;
 
    if (login) {
-    const response = await requestPost("/login", { username, password });
-    setItem("token", response.token);
-    setItem("user", response.userData);
+    
 
-    saveUserData(
-     response.userData.id,
-     response.userData.username,
-     response.userData.accountId
-    );
-   } else {
-    await requestPost("/signin", { username, password });
+      const response = await requestPost("/login", { username, password });
+      
+      setItem("token", response.token);
+      setItem("user", response.userData);
+  
+      saveUserData(
+       response.userData.id,
+       response.userData.username,
+       response.userData.accountId
+      );
+        
+   } else {    
+      await requestPost("/signin", { username, password });
    }
    return login ? history(`/balance/${user.accountId}`) : history("/login");
   },
@@ -119,6 +125,11 @@ const Form = () => {
        {signin && formik.errors.password}
       </div>
      ) : null}
+     {login && errorMessage ? (
+      <div className="bg-ng-pink font-semibold rounded-md p-2 mb-4">{
+        errorMessage}
+      </div>
+     ): null}
      <div className="w-full flex flex-col justify-center gap-4 mt-8">
       <button
        type="button"

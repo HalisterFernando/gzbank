@@ -7,11 +7,10 @@ import React, {
 
 import MoneyTransfer from "../images/transfer.png";
 import { userContext, UserContextType } from "../context/UserContext";
-import { requestData, requestPost } from "../helpers/requests";
 import { getItem } from "../helpers/localStorage";
-import { setToken } from "../helpers/requests";
 import { useFormik } from "formik";
 import { transferSchema } from "../validations/yupSchemas";
+import useAxios from "../hooks/useAxios"
 
 type Account = {
  accountId: string;
@@ -22,6 +21,8 @@ function Transfer() {
  const { user, userAmount, saveUserAmount } = useContext(
   userContext
  ) as UserContextType;
+
+ const { setToken, requestData, requestPost } = useAxios()
 
  const [transfer, setTransfer] = useState({
   accountId: "",

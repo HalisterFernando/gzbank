@@ -1,15 +1,16 @@
 import React, { useEffect, useContext } from "react";
 import MoneyBag from "../images/money-bag.png";
 import { getItem } from "../helpers/localStorage";
-import { setToken } from "../helpers/requests";
-import { requestData } from "../helpers/requests";
 import replaceDotToComa from "../helpers/replace";
+import useAxios from "../hooks/useAxios";
 import { userContext, UserContextType } from "../context/UserContext";
 
 function Balance() {
  const { user, userAmount, saveUserAmount } = useContext(
   userContext
  ) as UserContextType;
+
+const { setToken, requestData } = useAxios()
 
  useEffect(() => {
   const getBalance = async () => {

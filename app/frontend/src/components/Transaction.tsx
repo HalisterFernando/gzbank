@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext, ChangeEvent } from "react";
 import { userContext, UserContextType } from "../context/UserContext";
 import { setItem, getItem } from "../helpers/localStorage";
-import { requestData, setParam } from "../helpers/requests";
+import useAxios from "../hooks/useAxios";
 
 type Transactions = {
  id: number;
@@ -13,6 +13,7 @@ type Transactions = {
 
 const Transaction = () => {
  const { user } = useContext(userContext) as UserContextType;
+ const { requestData } = useAxios()
  const [transactions, setTransactions] = useState<Transactions[]>([]);
  const [transactionType, setTransactionType] = useState({
   all: true,
@@ -31,7 +32,7 @@ const Transaction = () => {
 
  useEffect(() => {
   const getTransactions = async () => {
-   setParam(user.id);
+   
    const response = await requestData(`/transaction/history/${user.id}`);
    setItem("transactions", response);
    setTransactions(response);
